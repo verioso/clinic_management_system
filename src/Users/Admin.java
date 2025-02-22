@@ -61,7 +61,7 @@ public class Admin extends javax.swing.JFrame {
         jPanel9.setBackground(new java.awt.Color(153, 255, 255));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel10.setBackground(new java.awt.Color(153, 0, 51));
+        jPanel10.setBackground(new java.awt.Color(102, 255, 153));
         jPanel10.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 51, 102)));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -82,7 +82,7 @@ public class Admin extends javax.swing.JFrame {
 
         jPanel9.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 60));
 
-        jPanel11.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel11.setBackground(new java.awt.Color(0, 255, 204));
         jPanel11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

@@ -66,6 +66,7 @@ public class Registration extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
@@ -90,17 +91,18 @@ public class Registration extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel9.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel9.setBackground(new java.awt.Color(51, 255, 51));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel10.setBackground(new java.awt.Color(153, 0, 51));
+        jPanel10.setBackground(new java.awt.Color(0, 204, 204));
         jPanel10.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 51, 102)));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel16.setBackground(new java.awt.Color(51, 255, 51));
         jLabel16.setFont(new java.awt.Font("Berlin Sans FB", 1, 24)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Clinic Management Registration");
-        jPanel10.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 610, 40));
+        jPanel10.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 620, 40));
 
         jLabel28.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -114,9 +116,14 @@ public class Registration extends javax.swing.JFrame {
 
         jPanel9.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 60));
 
-        jPanel11.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel11.setBackground(new java.awt.Color(255, 0, 0));
         jPanel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mjgwapo.png"))); // NOI18N
+        jPanel11.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 110, 170));
+
         jPanel9.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 110, 320));
 
         jLabel23.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -124,7 +131,8 @@ public class Registration extends javax.swing.JFrame {
         jLabel23.setText("Contact #:");
         jPanel9.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 90, -1));
 
-        jLabel12.setFont(new java.awt.Font("Berlin Sans FB", 1, 24)); // NOI18N
+        jLabel12.setBackground(new java.awt.Color(51, 255, 51));
+        jLabel12.setFont(new java.awt.Font("Ink Free", 1, 24)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Registration Page");
         jPanel9.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 560, 70));
@@ -344,6 +352,7 @@ public class Registration extends javax.swing.JFrame {
     private javax.swing.JTextField fname;
     private javax.swing.JComboBox<String> gender;
     private javax.swing.JButton jButton5;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel23;
