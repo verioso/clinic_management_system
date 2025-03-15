@@ -6,6 +6,8 @@
 package LoginPage;
 
 import Config.config;
+import Config.passwordHasher;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -82,14 +84,15 @@ public class Registration extends javax.swing.JFrame {
         jLabel35 = new javax.swing.JLabel();
         fname = new javax.swing.JTextField();
         pconfirm = new javax.swing.JPasswordField();
-        pname = new javax.swing.JPasswordField();
         Back = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel36 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         contact = new javax.swing.JTextField();
+        pname = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         jPanel9.setBackground(new java.awt.Color(51, 255, 51));
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -197,13 +200,6 @@ public class Registration extends javax.swing.JFrame {
         });
         jPanel9.add(pconfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, 160, -1));
 
-        pname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pnameActionPerformed(evt);
-            }
-        });
-        jPanel9.add(pname, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 160, -1));
-
         Back.setBackground(new java.awt.Color(0, 255, 255));
         Back.setText("Back");
         Back.addActionListener(new java.awt.event.ActionListener() {
@@ -232,25 +228,13 @@ public class Registration extends javax.swing.JFrame {
         jLabel24.setText("Email:");
         jPanel9.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 90, -1));
         jPanel9.add(contact, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 160, -1));
+        jPanel9.add(pname, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 160, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel9);
+        jPanel9.setBounds(52, 39, 670, 380);
 
-        pack();
+        setSize(new java.awt.Dimension(793, 502));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel28MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel28MouseClicked
@@ -269,10 +253,6 @@ public class Registration extends javax.swing.JFrame {
     private void pconfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pconfirmActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pconfirmActionPerformed
-
-    private void pnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pnameActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         // TODO add your handling code here:
@@ -297,17 +277,26 @@ public class Registration extends javax.swing.JFrame {
         }else if(duplicateChecker()){
             System.out.println("Duplicate Exist!");
         }else{
+              try {
+            String pass = passwordHasher.hashPassword(pname.getText());
             config conf = new config();
+            
+                
             if(conf.insertData("INSERT INTO users (fname, lname, gender, account_type, email, uname, pname, contact, status) "
                 + "VALUES ('"+fname.getText()+"', '"+lname.getText()+"', '"+gender.getSelectedItem()+"'"
                 + ", '"+utype.getSelectedItem()+"', '"+email.getText()+"', '"+uname.getText()+"'"
-                + ", '"+pname.getText()+"', '"+contact.getText()+"', 'Pending')")==1){
+                + ", '"+pass+"', '"+contact.getText()+"', 'Pending')")==1){
+                
             JOptionPane.showMessageDialog(null, "Registered Successfully!");
             Login login = new Login();
             login.setVisible(true);
             this.dispose();
             }
+        }  catch(NoSuchAlgorithmException ex){
+               System.out.println(""+ ex);
+           }   
         }
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

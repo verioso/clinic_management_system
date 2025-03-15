@@ -5,9 +5,12 @@
  */
 package LoginPage;
 
+import Admin.admins;
+import Config.Session;
 import Config.config;
-import Users.Admin;
+import Config.passwordHasher;
 import Users.User;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -28,21 +31,52 @@ public class Login extends javax.swing.JFrame {
     static String status;
     static String type;
     
+    
     public static boolean loging_in(String username, String password){
-        config conf = new config();
+        
+         config conf = new config();
         try{
-            String query = "SELECT * FROM users WHERE uname = '"+username+"' AND pname = '"+password+"'";
+        String query = "SELECT * FROM users WHERE uname ='"+username+ "' ";
             ResultSet resultSet = conf.getData(query);
             if(resultSet.next()){
-                status = resultSet.getString("status");
+                
+             
+                String hashedPass= resultSet.getString("pname");
+                String rehashedPass = passwordHasher.hashPassword(password);
+                
+                  System.out.println(""+hashedPass );
+                   System.out.println(""+ rehashedPass );
+                  
+                     
+                  if ( hashedPass.equals(rehashedPass )){
+                        status = resultSet.getString("status");
                 type = resultSet.getString("account_type");
-                return true;
-            }else{
-                return false;
+                
+                
+                    Session ses = Session.getInstance();
+                    ses.setId(resultSet.getInt("id") );
+                    ses.setFname(resultSet.getString("fname") );
+                    ses.setLnmae(resultSet.getString("lname") );
+                      ses.setGender(resultSet.getString("gender") );
+                    ses.setAccount_type(resultSet.getString("account_type") );
+                    ses.setEmail(resultSet.getString("email") );
+                    ses.setUname(resultSet.getString("uname") );
+                    ses.setPname(resultSet.getString("pname") );
+                    ses.setContact(resultSet.getString("contact") );
+                    ses.setStatus(resultSet.getString("status") );
+                 return true;
+                  }else{
+                  return false;
+                  }
+                  
+                } else{
+                 return false;
             }
-        }catch(SQLException ex){
-            return false;
+            
+        }catch(SQLException | NoSuchAlgorithmException ex){
+            return false ;
         }
+       
     }
 
     /**
@@ -70,6 +104,7 @@ public class Login extends javax.swing.JFrame {
         login = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -156,24 +191,11 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel3.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 250, 80, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel3);
+        jPanel3.setBounds(32, 44, 670, 380);
 
-        pack();
+        setSize(new java.awt.Dimension(774, 507));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
@@ -199,8 +221,8 @@ public class Login extends javax.swing.JFrame {
             }else{
                 JOptionPane.showMessageDialog(null, "Login Successfully!");
                 if(type.equals("Admin")){
-                    Admin admin = new Admin();
-                    admin.setVisible(true);
+                    admins ad = new admins();
+                    ad.setVisible(true);
                     this.dispose();
                 }else{
                     User user = new User();
